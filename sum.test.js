@@ -4,10 +4,11 @@ test('adds 1 + 2 to equal 3', () => {
   expect(sum(1, 2)).toBe(3);
 });
 
+// Common Matchers
 test('two plus two is four', () => {
     expect(2 + 2).toBe(4);
 });
-  
+
 test('object assignment', () => {
     const data = {one: 1};
     data['two'] = 2;
@@ -22,6 +23,7 @@ test('adding positive numbers is not zero', () => {
     }
 });
 
+// Truthiness
 test('null', () => {
     const n = null;
     expect(n).toBeNull();
@@ -39,7 +41,8 @@ test('zero', () => {
     expect(z).not.toBeTruthy();
     expect(z).toBeFalsy();
 });
-  
+
+// Numbers
 test('two plus two', () => {
     const value = 2 + 2;
     expect(value).toBeGreaterThan(3);
@@ -58,4 +61,91 @@ test('adding floating point numbers', () => {
     expect(value).toBeCloseTo(0.3); // This works.
 });
   
+// Arrays and iterables
+const shoppingList = [
+    'diapers',
+    'kleenex',
+    'trash bags',
+    'paper towels',
+    'milk',
+  ];
+  
+test('the shopping list has milk on it', () => {
+    expect(shoppingList).toContain('milk');
+    expect(new Set(shoppingList)).toContain('milk');
+});
 
+// Exceptions
+function compileAndroidCode() {
+    throw new Error('you are using the wrong JDK');
+}
+
+test('compiling android goes as expected', () => {
+    expect(() => compileAndroidCode()).toThrow();
+    expect(() => compileAndroidCode()).toThrow(Error);
+  
+    // You can also use the exact error message or a regexp
+    expect(() => compileAndroidCode()).toThrow('you are using the wrong JDK');
+    expect(() => compileAndroidCode()).toThrow(/JDK/);
+});
+
+// Promise
+// test('the data is peanut butter', () => {
+//     return fetchData().then(data => {
+//       expect(data).toBe('peanut butter');
+//     });
+// });
+
+// Async/Await
+// test('the data is peanut butter', async () => {
+//     const data = await fetchData();
+//     expect(data).toBe('peanut butter');
+// });
+  
+// test('the fetch fails with an error', async () => {
+//     expect.assertions(1);
+//     try {
+//       await fetchData();
+//     } catch (e) {
+//       expect(e).toMatch('error');
+//     }
+// });
+
+// test('the data is peanut butter', async () => {
+//     await expect(fetchData()).resolves.toBe('peanut butter');
+// });
+
+// test('the fetch fails with an error', async () => {
+//     await expect(fetchData()).rejects.toMatch('error');
+// });
+
+// test('the fetch fails with an error', () => {
+//     expect.assertions(1);
+//     return fetchData().catch(e => expect(e).toMatch('error'));
+// });
+
+// Callbacks
+// test('the data is peanut butter', done => {
+//     function callback(error, data) {
+//       if (error) {
+//         done(error);
+//         return;
+//       }
+//       try {
+//         expect(data).toBe('peanut butter');
+//         done();
+//       } catch (error) {
+//         done(error);
+//       }
+//     }
+  
+//     fetchData(callback);
+//   });
+
+// .resolves / .rejects
+// test('the data is peanut butter', () => {
+//     return expect(fetchData()).resolves.toBe('peanut butter');
+//   });
+// test('the fetch fails with an error', () => {
+//     return expect(fetchData()).rejects.toMatch('error');
+//   });
